@@ -45,8 +45,7 @@ function App() {
   const listmarkup = <div>List markup</div>
   return (
     <div className="App">
-      { state.loading ? 'Loading...' : listmarkup }
-      { state.error ? state.error : null }
+      { state.loading ? 'Loading...' : ( state.error ? state.error : listmarkup ) }
     </div>
   );
 }
