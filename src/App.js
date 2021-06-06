@@ -1,4 +1,5 @@
 import { useEffect, useReducer } from 'react';
+import { ListGroup, ListGroupItem, Badge } from 'reactstrap';
 import axios from 'axios';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -43,9 +44,16 @@ function App() {
   }, [])
 
   const listmarkup = (
-    <ul>
-      { state.todos.map( todo => <li key={ todo.id } >{ todo.title }</li> ) }
-    </ul>
+    <ListGroup>
+      { state.todos.map( todo => {
+        return (
+          <ListGroupItem key={ todo.id } >
+            { todo.title }
+            { todo.completed ? ( <Badge color="success" className="ml-1">Completed</Badge> ) : 
+            ( <Badge color="danger" className="ml-1">Incomplete</Badge> ) }
+          </ListGroupItem> 
+        )})}
+    </ListGroup>
   )
   return (
     <div className="App">
