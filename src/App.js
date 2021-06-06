@@ -15,8 +15,14 @@ const reducer = (state, action) => {
         error: "",
         todos: action.payload
       }
+    case 'SET_ERROR':
+      return {
+        loading: false,
+        error: "There are some errors",
+        todos: []
+      }
     default:
-      break;
+      return state;
   }
 }
 
