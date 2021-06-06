@@ -33,7 +33,6 @@ function App() {
   useEffect(() => {
     axios.get('https://jsonplaceholder.typicode.com/todos')
     .then(res => {
-      console.log(res.data)
       dispatch({ type: 'SET_DATA', payload: res.data });
     })
     .catch(err => {
@@ -42,7 +41,11 @@ function App() {
     });
   }, [])
 
-  const listmarkup = <div>List markup</div>
+  const listmarkup = (
+    <ul>
+      { state.todos.map( todo => <li key={ todo.id } >{ todo.title }</li> ) }
+    </ul>
+  )
   return (
     <div className="App">
       { state.loading ? 'Loading...' : ( state.error ? state.error : listmarkup ) }
