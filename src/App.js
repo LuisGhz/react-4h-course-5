@@ -1,4 +1,5 @@
 import { useEffect, useReducer } from 'react';
+import axios from 'axios';
 import './App.css';
 
 const initialState = {
@@ -27,8 +28,23 @@ const reducer = (state, action) => {
 }
 
 function App() {
+const [state, dispatch] = useReducer(reducer, initialState);
+
+useEffect(() => {
+  axios.get('https://jsonplaceholder.typicode.com/todos')
+  .then(res => {
+    console.log(res.data)
+    dispatch({ type: 'SET_DATA', payload: res.data });
+  })
+  .catch(err => {
+    console.error(err);
+    dispatch({ type: 'SET_ERROR' })
+  });
+}, [])
+
   return (
     <div className="App">
+
     </div>
   );
 }
