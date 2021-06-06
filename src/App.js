@@ -28,23 +28,25 @@ const reducer = (state, action) => {
 }
 
 function App() {
-const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
-useEffect(() => {
-  axios.get('https://jsonplaceholder.typicode.com/todos')
-  .then(res => {
-    console.log(res.data)
-    dispatch({ type: 'SET_DATA', payload: res.data });
-  })
-  .catch(err => {
-    console.error(err);
-    dispatch({ type: 'SET_ERROR' })
-  });
-}, [])
+  useEffect(() => {
+    axios.get('https://jsonplaceholder.typicode.com/todos')
+    .then(res => {
+      console.log(res.data)
+      dispatch({ type: 'SET_DATA', payload: res.data });
+    })
+    .catch(err => {
+      console.error(err);
+      dispatch({ type: 'SET_ERROR' })
+    });
+  }, [])
 
+  const listmarkup = <div>List markup</div>
   return (
     <div className="App">
-
+      { state.loading ? 'Loading...' : listmarkup }
+      { state.error ? state.error : null }
     </div>
   );
 }
